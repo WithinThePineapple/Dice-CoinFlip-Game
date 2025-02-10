@@ -17,24 +17,28 @@
             background: transparent;
         }
 
-        /* Game Icons */
-        .game-icon {
+        /* Game Icons Container */
+        .game-icons-container {
             position: fixed;
             top: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between; /* Space icons evenly */
+            align-items: center;
+            padding: 0 20px; /* Add padding to the sides */
+            z-index: 1000;
+        }
+
+        /* Game Icons */
+        .game-icon {
             width: 65px;
             height: 65px;
             cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 1000;
         }
         .game-icon:hover {
             transform: scale(1.2);
-        }
-        #dice-icon {
-            left: 20px;
-        }
-        #coin-icon {
-            left: 100px;
         }
 
         /* Game Overlay */
@@ -230,19 +234,19 @@
     </style>
 </head>
 <body>
-    <!-- Game Icons -->
-    <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-icon-m6Ljleeb4MTDQ5Nd.png" 
-         class="game-icon" 
-         id="dice-icon"
-         onclick="openGame('dice')"
-         alt="Dice Game Icon"
-         aria-label="Open Dice Game">
-    <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/coinflip_icon-AMql6yOKb5TQX5Qj.png" 
-         class="game-icon" 
-         id="coin-icon"
-         onclick="openGame('coin')"
-         alt="Coin Flip Game Icon"
-         aria-label="Open Coin Flip Game">
+    <!-- Game Icons Container -->
+    <div class="game-icons-container">
+        <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-icon-m6Ljleeb4MTDQ5Nd.png" 
+             class="game-icon" 
+             onclick="openGame('dice')"
+             alt="Dice Game Icon"
+             aria-label="Open Dice Game">
+        <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/coinflip_icon-AMql6yOKb5TQX5Qj.png" 
+             class="game-icon" 
+             onclick="openGame('coin')"
+             alt="Coin Flip Game Icon"
+             aria-label="Open Coin Flip Game">
+    </div>
 
     <!-- Dice Game Overlay -->
     <div class="game-overlay" id="diceOverlay" onclick="if(event.target===this) closeGame('dice')">
