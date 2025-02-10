@@ -24,9 +24,9 @@
             left: 0;
             right: 0;
             display: flex;
-            justify-content: center; /* Center icons horizontally */
+            justify-content: center;
             align-items: center;
-            gap: 60px; /* Increased gap between icons */
+            gap: 100px; /* Increased gap to 100px */
             z-index: 1000;
         }
 
@@ -67,12 +67,13 @@
             border-radius: 15px;
             position: relative;
             max-width: 95%;
-            width: 600px;
+            width: 800px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 550px; /* Increased height to accommodate larger elements */
+            min-height: 650px;
+            justify-content: center; /* Center content vertically */
         }
 
         /* Close Button */
@@ -88,14 +89,15 @@
 
         /* Dice Game Styles */
         :root {
-            --dice-size: 180px; /* Increased dice size */
-            --translate-z: 90px; /* Adjusted for larger dice */
+            --dice-size: min(220px, 40vmin); /* Increased size with responsive limit */
+            --translate-z: calc(var(--dice-size) / 2);
         }
         .dice-pair {
             display: flex;
             justify-content: center;
             gap: 30px;
             margin: 25px 0;
+            margin-top: 100px; /* Move dice down closer to center */
         }
         .dice-container {
             width: var(--dice-size);
@@ -142,7 +144,7 @@
         .roll-btn {
             display: block;
             margin: 20px auto;
-            margin-top: auto; /* Push button to the bottom */
+            margin-top: auto;
             padding: 15px 40px;
             font-size: 18px;
             background: #FF4081;
@@ -165,9 +167,10 @@
             justify-content: center;
             align-items: center;
             margin: 20px auto;
+            margin-top: 100px; /* Move coin down closer to center */
             perspective: 1000px;
-            width: 200px; /* Increased coin size */
-            height: 200px;
+            width: min(300px, 50vmin); /* Increased size with responsive limit */
+            height: min(300px, 50vmin);
         }
         .coin {
             width: 100%;
@@ -196,7 +199,7 @@
         .flip-btn {
             display: block;
             margin: 20px auto;
-            margin-top: auto; /* Push button to the bottom */
+            margin-top: auto;
             padding: 15px 40px;
             font-size: 18px;
             background: #25c2bd;
@@ -214,25 +217,37 @@
         }
 
         /* Responsive Adjustments */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .game-icons-container {
+                gap: 80px; /* Smaller gap for tablets */
+            }
             :root {
-                --dice-size: 30vmin;
-                --translate-z: 15vmin;
-            }
-            .dice-pair {
-                gap: 15px;
-            }
-            .game-box {
-                padding: 15px;
-                min-height: 450px; /* Adjusted height for mobile */
+                --dice-size: min(180px, 35vmin);
             }
             .coin-container {
-                width: 150px;
-                height: 150px;
+                width: min(250px, 45vmin); /* Slightly smaller for tablets */
+                height: min(250px, 45vmin);
             }
-            .coin {
-                width: 150px;
-                height: 150px;
+            .game-box {
+                min-height: 500px;
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-icons-container {
+                gap: 60px; /* Smaller gap for mobile */
+            }
+            :root {
+                --dice-size: min(150px, 30vmin);
+            }
+            .coin-container {
+                width: min(200px, 40vmin); /* Smaller for mobile */
+                height: min(200px, 40vmin);
+            }
+            .game-box {
+                min-height: 450px;
+                padding: 15px;
             }
         }
     </style>
