@@ -26,7 +26,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 100px; /* Increased gap to 100px */
+      gap: 100px;
       z-index: 1000;
     }
 
@@ -73,7 +73,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 650px;
-      justify-content: center; /* Center content vertically */
+      justify-content: center;
     }
 
     /* Close Button */
@@ -89,7 +89,7 @@
 
     /* Dice Game Styles */
     :root {
-      --dice-size: min(220px, 40vmin); /* Increased size with responsive limit */
+      --dice-size: min(220px, 40vmin);
       --translate-z: calc(var(--dice-size) / 2);
     }
     .dice-pair {
@@ -97,7 +97,7 @@
       justify-content: center;
       gap: 30px;
       margin: 25px 0;
-      margin-top: 100px; /* Move dice down closer to center */
+      margin-top: 100px;
     }
     .dice-container {
       width: var(--dice-size);
@@ -167,9 +167,9 @@
       justify-content: center;
       align-items: center;
       margin: 20px auto;
-      margin-top: 100px; /* Move coin down closer to center */
+      margin-top: 100px;
       perspective: 1000px;
-      width: min(300px, 50vmin); /* Increased size with responsive limit */
+      width: min(300px, 50vmin);
       height: min(300px, 50vmin);
     }
     .coin {
@@ -180,7 +180,8 @@
       transform-origin: center;
       margin: 0 auto;
       display: block;
-      /* NO scale here - scale handled by JS */
+      transform: scale(1.3); /* <-- scale applied here */
+      transition: transform 0.5s ease;
     }
     .coin img {
       width: 100%;
@@ -220,13 +221,13 @@
     /* Responsive Adjustments */
     @media (max-width: 768px) {
       .game-icons-container {
-        gap: 80px; /* Smaller gap for tablets */
+        gap: 80px;
       }
       :root {
         --dice-size: min(180px, 35vmin);
       }
       .coin-container {
-        width: min(250px, 45vmin); /* Slightly smaller for tablets */
+        width: min(250px, 45vmin);
         height: min(250px, 45vmin);
       }
       .game-box {
@@ -237,13 +238,13 @@
 
     @media (max-width: 480px) {
       .game-icons-container {
-        gap: 60px; /* Smaller gap for mobile */
+        gap: 60px;
       }
       :root {
         --dice-size: min(150px, 30vmin);
       }
       .coin-container {
-        width: min(200px, 40vmin); /* Smaller for mobile */
+        width: min(200px, 40vmin);
         height: min(200px, 40vmin);
       }
       .game-box {
@@ -343,7 +344,7 @@
       }, 2500);
     }
 
-    // Coin Flip Game Logic with scale(1.3)
+    // Coin Flip Game Logic
     function flipCoin() {
       const coin = document.getElementById('coin');
       coin.classList.add('flipping');
@@ -351,6 +352,7 @@
       setTimeout(() => {
         coin.classList.remove('flipping');
         const result = Math.random() < 0.5 ? 0 : 180;
+        // include scale(1.3) with rotation
         coin.style.transform = `scale(1.3) rotateY(${result + 2160}deg)`;
         setTimeout(() => {
           coin.style.transform = `scale(1.3) rotateY(${result}deg)`;
@@ -368,6 +370,7 @@
       setTimeout(() => {
         document.getElementById(`${game}Overlay`).style.display = 'none';
         if (game === 'coin') {
+          // reset transform with scale
           document.getElementById('coin').style.transform = 'scale(1.3) rotateY(0deg)';
         }
       }, 300);
