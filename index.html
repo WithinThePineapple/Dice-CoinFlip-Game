@@ -171,6 +171,7 @@
             perspective: 1000px;
             width: min(300px, 50vmin); /* Same container size */
             height: min(300px, 50vmin);
+            overflow: visible; /* Allow bigger coin to overflow container */
         }
         .coin {
             width: 130%; /* Increase coin size by 30% */
@@ -178,7 +179,8 @@
             position: relative;
             transform-style: preserve-3d;
             transform-origin: center;
-            margin: 0 auto;
+            margin-left: -15%; /* Center the larger coin */
+            margin-top: -15%;
             display: block;
             transition: transform 2s cubic-bezier(0.4, 0.2, 0.2, 1);
         }
@@ -228,10 +230,13 @@
             .coin-container {
                 width: min(300px, 50vmin);
                 height: min(300px, 50vmin);
+                overflow: visible;
             }
             .coin {
                 width: 130%;
                 height: 130%;
+                margin-left: -15%;
+                margin-top: -15%;
             }
             .game-box {
                 min-height: 500px;
@@ -249,10 +254,13 @@
             .coin-container {
                 width: min(300px, 50vmin);
                 height: min(300px, 50vmin);
+                overflow: visible;
             }
             .coin {
                 width: 130%;
                 height: 130%;
+                margin-left: -15%;
+                margin-top: -15%;
             }
             .game-box {
                 min-height: 450px;
@@ -358,7 +366,6 @@
 
             setTimeout(() => {
                 coin.classList.remove('flipping');
-                // Pick random result, 0 or 180 degrees plus multiple rotations for smooth flip
                 const result = Math.random() < 0.5 ? 0 : 180;
                 coin.style.transform = `rotateY(${result + 2160}deg)`;
                 setTimeout(() => {
