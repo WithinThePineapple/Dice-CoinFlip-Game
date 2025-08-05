@@ -163,25 +163,25 @@
 
         /* Coin Flip Game Styles */
         .coin-container {
+            position: relative;
+            width: min(300px, 50vmin); /* Same container size */
+            height: min(300px, 50vmin);
+            margin: 20px auto 10px auto; /* Added bottom margin for spacing */
+            perspective: 1000px;
+            overflow: visible; /* Allow bigger coin to overflow container */
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px auto;
-            margin-top: 100px; /* Move coin down closer to center */
-            perspective: 1000px;
-            width: min(300px, 50vmin); /* Same container size */
-            height: min(300px, 50vmin);
-            overflow: visible; /* Allow bigger coin to overflow container */
         }
         .coin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
             width: 130%; /* Increase coin size by 30% */
             height: 130%;
-            position: relative;
             transform-style: preserve-3d;
             transform-origin: center;
-            margin-left: -15%; /* Center the larger coin */
-            margin-top: -15%;
-            display: block;
+            transform: translate(-50%, -50%);
             transition: transform 2s cubic-bezier(0.4, 0.2, 0.2, 1);
         }
         .coin img {
@@ -210,6 +210,8 @@
             border: none;
             border-radius: 30px;
             cursor: pointer;
+            position: relative; /* To ensure stacking context */
+            z-index: 10;
         }
         @keyframes flip {
             0% { transform: rotateY(0); }
@@ -235,8 +237,9 @@
             .coin {
                 width: 130%;
                 height: 130%;
-                margin-left: -15%;
-                margin-top: -15%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
             .game-box {
                 min-height: 500px;
@@ -259,8 +262,9 @@
             .coin {
                 width: 130%;
                 height: 130%;
-                margin-left: -15%;
-                margin-top: -15%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
             .game-box {
                 min-height: 450px;
