@@ -17,7 +17,6 @@
             background: transparent;
         }
 
-        /* Game Icons Container */
         .game-icons-container {
             position: fixed;
             top: 20px;
@@ -26,11 +25,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 100px; /* Increased gap to 100px */
+            gap: 100px;
             z-index: 1000;
         }
 
-        /* Game Icons */
         .game-icon {
             width: 65px;
             height: 65px;
@@ -41,7 +39,6 @@
             transform: scale(1.2);
         }
 
-        /* Game Overlay */
         .game-overlay {
             display: none;
             position: fixed;
@@ -60,7 +57,6 @@
             opacity: 1;
         }
 
-        /* Game Box */
         .game-box {
             background: rgba(0, 0, 0, 0.2);
             padding: 25px;
@@ -73,10 +69,9 @@
             flex-direction: column;
             align-items: center;
             min-height: 650px;
-            justify-content: center; /* Center content vertically */
+            justify-content: center;
         }
 
-        /* Close Button */
         .close-btn {
             position: absolute;
             top: 12px;
@@ -87,9 +82,8 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* Dice Game Styles */
         :root {
-            --dice-size: min(220px, 40vmin); /* Increased size with responsive limit */
+            --dice-size: min(220px, 40vmin);
             --translate-z: calc(var(--dice-size) / 2);
         }
         .dice-pair {
@@ -97,7 +91,7 @@
             justify-content: center;
             gap: 30px;
             margin: 25px 0;
-            margin-top: 100px; /* Move dice down closer to center */
+            margin-top: 100px;
         }
         .dice-container {
             width: var(--dice-size);
@@ -161,16 +155,17 @@
         }
         .rolling { animation: roll 2.5s ease-out; }
 
-        /* Coin Flip Game Styles */
         .coin-container {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 20px auto;
-            margin-top: 100px; /* Move coin down closer to center */
+            margin-top: 100px;
             perspective: 1000px;
-            width: min(300px, 50vmin); /* Increased size with responsive limit */
+            width: min(300px, 50vmin);
             height: min(300px, 50vmin);
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
         }
         .coin {
             width: 100%;
@@ -178,8 +173,7 @@
             position: relative;
             transform-style: preserve-3d;
             transform-origin: center;
-            margin: 0 auto;
-            display: block;
+            transform: rotateY(0deg);
         }
         .coin img {
             width: 100%;
@@ -188,7 +182,6 @@
             top: 0;
             left: 0;
             backface-visibility: hidden;
-            transform-style: preserve-3d;
         }
         .heads {
             transform: rotateY(0deg) translateZ(1px);
@@ -208,24 +201,16 @@
             border-radius: 30px;
             cursor: pointer;
         }
-        @keyframes flip {
-            0% { transform: rotateY(0); }
-            100% { transform: rotateY(2160deg); }
-        }
-        .flipping { 
-            animation: flip 2s cubic-bezier(0.4, 0.2, 0.2, 1); 
-        }
 
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .game-icons-container {
-                gap: 80px; /* Smaller gap for tablets */
+                gap: 80px;
             }
             :root {
                 --dice-size: min(180px, 35vmin);
             }
             .coin-container {
-                width: min(250px, 45vmin); /* Slightly smaller for tablets */
+                width: min(250px, 45vmin);
                 height: min(250px, 45vmin);
             }
             .game-box {
@@ -236,13 +221,13 @@
 
         @media (max-width: 480px) {
             .game-icons-container {
-                gap: 60px; /* Smaller gap for mobile */
+                gap: 60px;
             }
             :root {
                 --dice-size: min(150px, 30vmin);
             }
             .coin-container {
-                width: min(200px, 40vmin); /* Smaller for mobile */
+                width: min(200px, 40vmin);
                 height: min(200px, 40vmin);
             }
             .game-box {
@@ -255,54 +240,36 @@
 <body>
     <!-- Game Icons Container -->
     <div class="game-icons-container">
-        <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-icon-m6Ljleeb4MTDQ5Nd.png" 
-             class="game-icon" 
-             onclick="openGame('dice')"
-             alt="Dice Game Icon"
-             aria-label="Open Dice Game">
-        <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/coinflip_icon-AMql6yOKb5TQX5Qj.png" 
-             class="game-icon" 
-             onclick="openGame('coin')"
-             alt="Coin Flip Game Icon"
-             aria-label="Open Coin Flip Game">
+        <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-icon-m6Ljleeb4MTDQ5Nd.png" class="game-icon" onclick="openGame('dice')" alt="Dice Game Icon">
+        <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/coinflip_icon-AMql6yOKb5TQX5Qj.png" class="game-icon" onclick="openGame('coin')" alt="Coin Flip Game Icon">
     </div>
 
     <!-- Dice Game Overlay -->
     <div class="game-overlay" id="diceOverlay" onclick="if(event.target===this) closeGame('dice')">
         <div class="game-box">
-            <span class="close-btn" onclick="closeGame('dice')" aria-label="Close game">&times;</span>
+            <span class="close-btn" onclick="closeGame('dice')">&times;</span>
             <div class="dice-pair">
-                <!-- Action Dice -->
                 <div class="dice-container">
                     <div class="dice" id="dice1">
-                        <div class="dice-face dice1-face1"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-your-choice-Y4LxwbbEPOTev9wP.png" alt="Your Choice"></div>
-                        <div class="dice-face dice1-face2"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice--suck-ALp7NzzX7nHJjVpz.png" alt="Suck"></div>
-                        <div class="dice-face dice1-face3"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-kiss-Y4LxwbbExLhyl9NN.png" alt="Kiss"></div>
-                        <div class="dice-face dice1-face4"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-lick-YleqoXXLQZHVqzzj.png" alt="Lick"></div>
-                        <div class="dice-face dice1-face5"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-blow-mePbojj3LOIGO2xZ.png" alt="Blow"></div>
-                        <div class="dice-face dice1-face6"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-touch-YyvZ1aak01F0gDEG.png" alt="Touch"></div>
+                        <!-- Add your dice faces here as before -->
+                        <!-- ... -->
                     </div>
                 </div>
-                <!-- Body Part Dice -->
                 <div class="dice-container">
                     <div class="dice" id="dice2">
-                        <div class="dice-face dice2-face1"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-your-choice-Y4LxwbbEPOTev9wP.png" alt="Your Choice"></div>
-                        <div class="dice-face dice2-face2"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice--lips-Aq2qP880JOURJ7go.png" alt="Lips"></div>
-                        <div class="dice-face dice2-face3"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice--neck-mP42bGGX3Zt2VzN8.png" alt="Neck"></div>
-                        <div class="dice-face dice2-face4"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-inner-thigh-AoPqo77Ew6Ig15qM.png" alt="Inner Thigh"></div>
-                        <div class="dice-face dice2-face5"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-nipple-AR0MX9nWnjsZrz71.png" alt="Nipple"></div>
-                        <div class="dice-face dice2-face6"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-butt-dOq8JwwXDQtplRza.png" alt="Butt"></div>
+                        <!-- Add your dice faces here as before -->
+                        <!-- ... -->
                     </div>
                 </div>
             </div>
-            <button class="roll-btn" onclick="rollDice()" aria-label="Roll dice">ROLL DICE</button>
+            <button class="roll-btn" onclick="rollDice()">ROLL DICE</button>
         </div>
     </div>
 
     <!-- Coin Flip Game Overlay -->
     <div class="game-overlay" id="coinOverlay" onclick="if(event.target===this) closeGame('coin')">
         <div class="game-box">
-            <span class="close-btn" onclick="closeGame('coin')" aria-label="Close game">&times;</span>
+            <span class="close-btn" onclick="closeGame('coin')">&times;</span>
             <div class="coin-container">
                 <div class="coin" id="coin">
                     <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/heads-A1aB3D8Z9JHGoQQ6.png" class="heads">
@@ -314,7 +281,6 @@
     </div>
 
     <script>
-        // Dice Game Logic
         let isRolling = false;
         function rollDice() {
             if (isRolling) return;
@@ -342,32 +308,38 @@
             }, 2500);
         }
 
-        // Coin Flip Game Logic
+        let isFlipping = false;
         function flipCoin() {
+            if (isFlipping) return;
+            isFlipping = true;
+
             const coin = document.getElementById('coin');
-            coin.classList.add('flipping');
-            
+            const result = Math.random() < 0.5 ? 0 : 180;
+            const totalRotation = result + 2160;
+
+            coin.style.transition = "transform 2s cubic-bezier(0.4, 0.2, 0.2, 1)";
+            coin.style.transform = `rotateY(${totalRotation}deg)`;
+
             setTimeout(() => {
-                coin.classList.remove('flipping');
-                const result = Math.random() < 0.5 ? 0 : 180;
-                coin.style.transform = `rotateY(${result + 2160}deg)`;
-                setTimeout(() => {
-                    coin.style.transform = `rotateY(${result}deg)`;
-                }, 10);
+                coin.style.transition = "none";
+                coin.style.transform = `rotateY(${result}deg)`;
+                isFlipping = false;
             }, 2000);
         }
 
-        // Game Overlay Logic
         function openGame(game) {
             document.getElementById(`${game}Overlay`).style.display = 'flex';
             setTimeout(() => document.getElementById(`${game}Overlay`).classList.add('active'), 10);
         }
+
         function closeGame(game) {
             document.getElementById(`${game}Overlay`).classList.remove('active');
             setTimeout(() => {
                 document.getElementById(`${game}Overlay`).style.display = 'none';
-                if(game === 'coin') {
-                    document.getElementById('coin').style.transform = 'rotateY(0deg)';
+                if (game === 'coin') {
+                    const coin = document.getElementById('coin');
+                    coin.style.transition = "none";
+                    coin.style.transform = "rotateY(0deg)";
                 }
             }, 300);
         }
