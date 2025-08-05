@@ -26,7 +26,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 100px;
+      gap: 100px; /* Increased gap to 100px */
       z-index: 1000;
     }
 
@@ -73,7 +73,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 650px;
-      justify-content: center;
+      justify-content: center; /* Center content vertically */
     }
 
     /* Close Button */
@@ -89,7 +89,7 @@
 
     /* Dice Game Styles */
     :root {
-      --dice-size: min(220px, 40vmin);
+      --dice-size: min(220px, 40vmin); /* Increased size with responsive limit */
       --translate-z: calc(var(--dice-size) / 2);
     }
     .dice-pair {
@@ -97,7 +97,7 @@
       justify-content: center;
       gap: 30px;
       margin: 25px 0;
-      margin-top: 100px;
+      margin-top: 100px; /* Move dice down closer to center */
     }
     .dice-container {
       width: var(--dice-size);
@@ -167,10 +167,16 @@
       justify-content: center;
       align-items: center;
       margin: 20px auto;
-      margin-top: 100px;
+      margin-top: 100px; /* Move coin down closer to center */
       perspective: 1000px;
-      width: min(300px, 50vmin);
+      width: min(300px, 50vmin); /* Keep container size same */
       height: min(300px, 50vmin);
+    }
+    .coin-wrapper {
+      /* This wrapper holds the scale so coin size stays constant */
+      transform: scale(1.3);
+      width: 100%;
+      height: 100%;
     }
     .coin {
       width: 100%;
@@ -180,7 +186,7 @@
       transform-origin: center;
       margin: 0 auto;
       display: block;
-      transform: scale(1.3); /* Keep coin scaled consistently */
+      /* Removed transform: scale(1.3) here */
     }
     .coin img {
       width: 100%;
@@ -220,13 +226,13 @@
     /* Responsive Adjustments */
     @media (max-width: 768px) {
       .game-icons-container {
-        gap: 80px;
+        gap: 80px; /* Smaller gap for tablets */
       }
       :root {
         --dice-size: min(180px, 35vmin);
       }
       .coin-container {
-        width: min(250px, 45vmin);
+        width: min(250px, 45vmin); /* Keep container size same */
         height: min(250px, 45vmin);
       }
       .game-box {
@@ -237,13 +243,13 @@
 
     @media (max-width: 480px) {
       .game-icons-container {
-        gap: 60px;
+        gap: 60px; /* Smaller gap for mobile */
       }
       :root {
         --dice-size: min(150px, 30vmin);
       }
       .coin-container {
-        width: min(200px, 40vmin);
+        width: min(200px, 40vmin); /* Keep container size same */
         height: min(200px, 40vmin);
       }
       .game-box {
@@ -273,6 +279,7 @@
     <div class="game-box">
       <span class="close-btn" onclick="closeGame('dice')" aria-label="Close game">&times;</span>
       <div class="dice-pair">
+        <!-- Action Dice -->
         <div class="dice-container">
           <div class="dice" id="dice1">
             <div class="dice-face dice1-face1"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-your-choice-Y4LxwbbEPOTev9wP.png" alt="Your Choice" /></div>
@@ -283,6 +290,7 @@
             <div class="dice-face dice1-face6"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-touch-YyvZ1aak01F0gDEG.png" alt="Touch" /></div>
           </div>
         </div>
+        <!-- Body Part Dice -->
         <div class="dice-container">
           <div class="dice" id="dice2">
             <div class="dice-face dice2-face1"><img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/dice-your-choice-Y4LxwbbEPOTev9wP.png" alt="Your Choice" /></div>
@@ -303,9 +311,11 @@
     <div class="game-box">
       <span class="close-btn" onclick="closeGame('coin')" aria-label="Close game">&times;</span>
       <div class="coin-container">
-        <div class="coin" id="coin">
-          <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/heads-A1aB3D8Z9JHGoQQ6.png" class="heads" />
-          <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/tails-A0x1Z2PM9eTg76wP.png" class="tails" />
+        <div class="coin-wrapper">
+          <div class="coin" id="coin">
+            <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/heads-A1aB3D8Z9JHGoQQ6.png" class="heads" />
+            <img src="https://assets.zyrosite.com/YrD3QqD87EH4j868/tails-A0x1Z2PM9eTg76wP.png" class="tails" />
+          </div>
         </div>
       </div>
       <button class="flip-btn" onclick="flipCoin()">FLIP COIN</button>
@@ -313,6 +323,7 @@
   </div>
 
   <script>
+    // Dice Game Logic
     let isRolling = false;
     function rollDice() {
       if (isRolling) return;
@@ -340,9 +351,11 @@
       }, 2500);
     }
 
+    // Coin Flip Game Logic
     function flipCoin() {
       const coin = document.getElementById('coin');
       coin.classList.add('flipping');
+
       setTimeout(() => {
         coin.classList.remove('flipping');
         const result = Math.random() < 0.5 ? 0 : 180;
@@ -353,17 +366,17 @@
       }, 2000);
     }
 
+    // Game Overlay Logic
     function openGame(game) {
       document.getElementById(`${game}Overlay`).style.display = 'flex';
       setTimeout(() => document.getElementById(`${game}Overlay`).classList.add('active'), 10);
     }
-
     function closeGame(game) {
       document.getElementById(`${game}Overlay`).classList.remove('active');
       setTimeout(() => {
         document.getElementById(`${game}Overlay`).style.display = 'none';
         if(game === 'coin') {
-          document.getElementById('coin').style.transform = 'scale(1.3) rotateY(0deg)';
+          document.getElementById('coin').style.transform = 'rotateY(0deg)';
         }
       }, 300);
     }
