@@ -184,9 +184,9 @@
       align-items: center;
       margin: 20px auto;
       margin-top: 100px;
-      perspective: 1000px;
-      width: min(300px, 50vmin);
-      height: min(300px, 50vmin);
+      perspective: 1500px;
+      width: 450px;
+      height: 450px;
     }
 
     .coin {
@@ -195,7 +195,7 @@
       position: relative;
       transform-style: preserve-3d;
       transform-origin: center;
-      transform: rotateY(0deg) scale(1);
+      transform: rotateY(0deg);
     }
 
     .coin img {
@@ -204,18 +204,24 @@
       position: absolute;
       top: 0;
       left: 0;
+      object-fit: contain;
       backface-visibility: hidden;
     }
 
-    .heads { transform: rotateY(0deg) translateZ(1px); }
-    .tails { transform: rotateY(180deg) translateZ(1px); }
+    .heads {
+      transform: rotateY(0deg) translateZ(1px);
+    }
+
+    .tails {
+      transform: rotateY(180deg) translateZ(1px);
+    }
 
     @media (max-width: 768px) {
       .game-icons-container { gap: 80px; }
       :root { --dice-size: min(180px, 35vmin); }
       .coin-container {
-        width: min(250px, 45vmin);
-        height: min(250px, 45vmin);
+        width: min(300px, 80vmin);
+        height: min(300px, 80vmin);
       }
       .game-box {
         min-height: 500px;
@@ -227,8 +233,8 @@
       .game-icons-container { gap: 60px; }
       :root { --dice-size: min(150px, 30vmin); }
       .coin-container {
-        width: min(200px, 40vmin);
-        height: min(200px, 40vmin);
+        width: min(250px, 80vmin);
+        height: min(250px, 80vmin);
       }
       .game-box {
         min-height: 450px;
@@ -308,11 +314,11 @@
       const totalRotation = result + 2160;
 
       coin.style.transition = "transform 2s ease-out";
-      coin.style.transform = `rotateY(${totalRotation}deg) scale(1.05)`;
+      coin.style.transform = `rotateY(${totalRotation}deg)`;
 
       setTimeout(() => {
         coin.style.transition = "none";
-        coin.style.transform = `rotateY(${result}deg) scale(1)`;
+        coin.style.transform = `rotateY(${result}deg)`;
         isFlipping = false;
       }, 2000);
     }
@@ -329,7 +335,7 @@
         if (game === 'coin') {
           const coin = document.getElementById('coin');
           coin.style.transition = "none";
-          coin.style.transform = "rotateY(0deg) scale(1)";
+          coin.style.transform = "rotateY(0deg)";
         }
       }, 300);
     }
